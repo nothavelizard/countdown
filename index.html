@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mysterious Countdown</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .glitch {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            text-shadow: -1px 0 blue, 1px 0 red;
+            clip: rect(0, 0, 0, 0);
+        }
+
+        .glitch::before {
+            left: -2px;
+            text-shadow: -1px 0 blue, 0px 0 red;
+            animation: glitch-anim 2s infinite linear alternate-reverse;
+        }
+
+        .glitch::after {
+            left: 2px;
+            text-shadow: 1px 0 red, 0px 0 blue;
+            animation: glitch-anim2 2s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% {
+                clip: rect(60px, 9999px, 100px, 0);
+            }
+
+            10% {
+                clip: rect(87px, 9999px, 17px, 0);
+            }
+
+            20% {
+                clip: rect(100px, 9999px, 63px, 0);
+            }
+
+            30% {
+                clip: rect(44px, 9999px, 69px, 0);
+            }
+
+            40% {
+                clip: rect(42px, 9999px, 28px, 0);
+            }
+
+            50% {
+                clip: rect(41px, 9999px, 63px, 0);
+            }
+
+            60% {
+                clip: rect(21px, 9999px, 66px, 0);
+            }
+
+            70% {
+                clip: rect(12px, 9999px, 83px, 0);
+            }
+
+            80% {
+                clip: rect(97px, 9999px, 3px, 0);
+            }
+
+            90% {
+                clip: rect(57px, 9999px, 61px, 0);
+            }
+
+            100% {
+                clip: rect(78px, 9999px, 22px, 0);
+            }
+        }
+
+        @keyframes glitch-anim2 {
+            0% {
+                clip: rect(33px, 9999px, 88px, 0);
+            }
+
+            10% {
+                clip: rect(12px, 9999px, 89px, 0);
+            }
+
+            20% {
+                clip: rect(67px, 9999px, 15px, 0);
+            }
+
+            30% {
+                clip: rect(41px, 9999px, 100px, 0);
+            }
+
+            40% {
+                clip: rect(64px, 9999px, 41px, 0);
+            }
+
+            50% {
+                clip: rect(85px, 9999px, 74px, 0);
+            }
+
+            60% {
+                clip: rect(38px, 9999px, 96px, 0);
+            }
+
+            70% {
+                clip: rect(46px, 9999px, 57px, 0);
+            }
+
+            80% {
+                clip: rect(17px, 9999px, 76px, 0);
+            }
+
+            90% {
+                clip: rect(21px, 9999px, 81px, 0);
+            }
+
+            100% {
+                clip: rect(22px, 9999px, 57px, 0);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white flex items-center justify-center h-screen">
+    <div class="container mx-auto p-4 text-center">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 glitch" data-text="Mysterious Countdown">Mysterious Countdown</h1>
+
+        <div class="flex justify-center space-x-4 mb-8">
+            <div class="digit-container">
+                <div id="days" class="text-2xl md:text-3xl lg:text-4xl font-mono">00</div>
+                <div class="text-sm text-gray-400">Days</div>
+            </div>
+            <div class="digit-container">
+                <div id="hours" class="text-2xl md:text-3xl lg:text-4xl font-mono">00</div>
+                <div class="text-sm text-gray-400">Hours</div>
+            </div>
+            <div class="digit-container">
+                <div id="minutes" class="text-2xl md:text-3xl lg:text-4xl font-mono">00</div>
+                <div class="text-sm text-gray-400">Minutes</div>
+            </div>
+            <div class="digit-container">
+                <div id="seconds" class="text-2xl md:text-3xl lg:text-4xl font-mono">00</div>
+                <div class="text-sm text-gray-400">Seconds</div>
+            </div>
+        </div>
+
+        <img src="https://placehold.co/600x400/E2E8F0/94A3B8?text=Placeholder" alt="Mysterious Image" class="rounded-lg shadow-lg mx-auto mb-8">
+
+        <p class="text-lg text-gray-300">Something amazing is coming...</p>
+    </div>
+
+    <script>
+        // Set the date we're counting down to
+        var countDownDate = new Date("Dec 31, 2024 23:59:59").getTime();
+
+        // Update the count down every 1 second
+        var x = setInterval(function() {
+
+            // Get today's date and time
+            var now = new Date().getTime();
+
+            // Find the distance between now and the count down date
+            var distance = countDownDate - now;
+
+            // Time calculations for days, hours, minutes and seconds
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Display the result in the element with id="demo"
+            document.getElementById("days").innerHTML = String(days).padStart(2, '0');
+            document.getElementById("hours").innerHTML = String(hours).padStart(2, '0');
+            document.getElementById("minutes").innerHTML = String(minutes).padStart(2, '0');
+            document.getElementById("seconds").innerHTML = String(seconds).padStart(2, '0');
+
+            // If the count down is finished, write some text
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("days").innerHTML = "00";
+                document.getElementById("hours").innerHTML = "00";
+                document.getElementById("minutes").innerHTML = "00";
+                document.getElementById("seconds").innerHTML = "00";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
